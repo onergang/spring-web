@@ -70,11 +70,11 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:mybatis.xml"/>
-        <property name="mapperLocations">
-            <list>
-                <value>classpath:mybatis/*.xml</value>
-            </list>
-        </property>
+        <!--<property name="mapperLocations">-->
+            <!--<list>-->
+            <!--<value>classpath:mybatis/*.xml</value>-->
+        <!--</list>-->
+        <!--</property>-->
     </bean>
     <!-- 定义式事务Transction -->
     <bean id="transactionManager"

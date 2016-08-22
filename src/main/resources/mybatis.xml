@@ -11,7 +11,7 @@
     <typeAliases>
         <typeAlias alias="user" type="com.gang.practice.spring.po.User"/>
     </typeAliases>
-    <!--<mappers>-->
-        <!--<mapper resource="mybatis/user-mapper.xml"/>-->
-    <!--</mappers>-->
+    <mappers>
+        <mapper resource="mybatis/user-mapper.xml"/>
+    </mappers>
 </configuration>

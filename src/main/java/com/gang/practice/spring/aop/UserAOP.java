@@ -14,13 +14,13 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class UserAOP {
-    @Pointcut("execution(* com.gang.aop.service.impl.*.find*(..))")
+    @Pointcut("execution(* com.gang.practice.spring.service.impl.*.find*(..))")
     public void checkUser() {
         //com.gang.aop.service.impl
         System.out.println("----------------查找用户----------------");
     }
 
-    @Pointcut("execution(* com.gang.aop.service.impl.*.add*(..))")
+    @Pointcut("execution(* com.gang.practice.spring.service.impl.*.add*(..))")
     public void addUser() {
         System.out.println("------切面----------添加用户----------------");
     }
