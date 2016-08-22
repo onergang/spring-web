@@ -1,7 +1,7 @@
 package com.springapp;
 
-import com.gang.aop.po.User;
-import com.gang.aop.service.UserService;
+import com.gang.practice.spring.po.User;
+import com.gang.practice.spring.service.UserService;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

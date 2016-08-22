@@ -6,7 +6,7 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--取消Service的加载   原因：此文件首先加载后容器已经存在Service类，使得cglib将不对Service进行代理-->
-    <context:component-scan base-package="com.gang.aop">
+    <context:component-scan base-package="com.gang.practice.spring">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
     </context:component-scan>
 

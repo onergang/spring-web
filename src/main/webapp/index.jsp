@@ -8,7 +8,7 @@
 </head>
 <body>
 <h3>欢迎页</h3>
-测试页面是否正常
+<img src="<%=request.getContextPath()%>/resource/logo.png"  alt="logo" />
 <a href="<%=request.getContextPath()%>/users/index/1">添加用户</a>
 <a href="<%=request.getContextPath()%>/users/index/2">修改用户</a>
 <a href="<%=request.getContextPath()%>/users/index/index">Default</a>

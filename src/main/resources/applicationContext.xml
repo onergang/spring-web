@@ -18,7 +18,7 @@
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <!-- spring扫描注解的配置 -->
-    <context:component-scan base-package="com.gang.aop">
+    <context:component-scan base-package="com.gang.practice.spring">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
@@ -28,14 +28,13 @@
     <task:scheduler id="qbScheduler" pool-size="12"/>
     <!--引入配置文件-->
     <context:property-placeholder ignore-unresolvable="true" location="classpath:jdbc.properties"/>
+
     <!-- 数据源 -->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-          destroy-method="close">
-        <!-- Oracle Connection Online -->
-        <property name="driverClassName" value="${jdbc.driver}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${db.driverClass}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
         <!-- Setting -->
         <!--maxActive: 最大连接数量 -->
         <property name="maxActive" value="100"/>
@@ -82,9 +81,11 @@
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-
+    <!--MapperScannerConigurer实际是在解析加载bean定义阶段的，此时设置sqlSessionFactory会导致提前初始化一些类-->
+    <!--PropertyPlaceholderConfigurer还没来得及替换定义中的变量，导致把表达式当作字符串复制了-->
+    <!--解决办法：使用sqlSessionFactoryBeanName注入，不会立即初始化sqlSessionFactory-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.gang.aop.dao"/>
-        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <property name="basePackage" value="com.gang.practice.spring.dao"/>
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
     </bean>
 </beans>

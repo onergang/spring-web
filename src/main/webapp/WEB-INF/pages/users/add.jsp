@@ -50,11 +50,11 @@
         </tr>
         <tr>
             <td>密&nbsp;码：</td>
-            <td><input type="text" name="userName"></td>
+            <td><input type="text" name="password"></td>
         </tr>
         <tr>
             <td>住&nbsp;址：</td>
-            <td><input type="text" name="userName"></td>
+            <td><input type="text" name="address"></td>
         </tr>
         <tr  align="center">
             <td colspan="2"><input type="submit" value="提交" class="addButton"></td>
