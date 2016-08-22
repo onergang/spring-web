@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 /**
  * @ClassName: UserAop
  * @Description:
- * @Copyright: Copyright (c) 2016
- * @Company: 伟业我爱我家
  * @Author GaoGang
  * @Date 2016-08-09 14:11
  * @Version V1.0
