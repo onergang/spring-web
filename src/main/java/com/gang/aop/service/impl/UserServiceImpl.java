@@ -29,7 +29,6 @@ public class UserServiceImpl implements UserService<User> {
 
     @Override
     public boolean addUser(User entity) {
-        System.out.println("-----enter----------------");
         return true;
     }
 
