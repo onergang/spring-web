@@ -1,5 +1,7 @@
 package com.gang.practice.spring.po;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,15 +18,15 @@ public class User implements Serializable {
     private String password;
     private Integer age;
     private int sex;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public Date birthday;
-    public Date mobile;
+    public String mobile;
     private String address;
     private Integer creator;
     private Date createTime;
     private Integer updator;
     private Date updateTime;
     private int isDel;
-
 
     public Integer getUserId() {
         return userId;
@@ -65,20 +67,18 @@ public class User implements Serializable {
     public void setSex(int sex) {
         this.sex = sex;
     }
-
     public Date getBirthday() {
         return birthday;
     }
-
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
-    public Date getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(Date mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 

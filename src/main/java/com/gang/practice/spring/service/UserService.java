@@ -19,5 +19,13 @@ public interface UserService<T> {
 
     public boolean deleteUser(String id);
 
+    public String checkUser(User user);
+
+    public User getUserInfo(Integer id);
+
     public List<T> getUser(Map<String, Object> condition);
+
+    public List<T> getUserList();
+
+
 }

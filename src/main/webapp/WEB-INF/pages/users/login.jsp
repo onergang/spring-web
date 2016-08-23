@@ -4,16 +4,16 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>用户添加</title>
+    <title>登陆</title>
     <link href="<c:url value="/common/css/common.css"/>" rel="stylesheet">
     <script type="text/javascript">
 
     </script>
 </head>
 <body>
-<form action="<%=request.getContextPath()%>/users/add" method="post">
+<form action="<%=request.getContextPath()%>/users/login" method="post">
     <fieldset style="margin:0px auto;width: 200px">
-        <legend>添加用户</legend>
+        <legend>登陆</legend>
         <table>
             <tr>
                 <td>用户名：</td>
@@ -21,22 +21,16 @@
             </tr>
             <tr>
                 <td>密&nbsp;码：</td>
-                <td><input type="text" name="password"></td>
-            </tr>
-            <tr>
-                <td>生&nbsp;日：</td>
-                <td><input type="text" name="birthday"></td>
-            </tr>
-            <tr>
-                <td>住&nbsp;址：</td>
-                <td><input type="text" name="address"></td>
+                <td><input type="password" name="password"></td>
             </tr>
             <tr align="center">
-                <td colspan="2"><input type="submit" value="提交" class="addButton"></td>
+                <td colspan="2">
+                    <input type="submit" value="提交" class="addButton">&nbsp;
+                    <a href="<%=request.getContextPath()%>/users/add">没有账号？注册一个</a>
+                </td>
             </tr>
         </table>
     </fieldset>
 </form>
-${ok}
 </body>
 </html>

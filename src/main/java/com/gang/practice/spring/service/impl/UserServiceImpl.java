@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.locks.Condition;
 
 /**
  * @ClassName: UserServiceImpl
@@ -63,7 +62,32 @@ public class UserServiceImpl implements UserService<User> {
     }
 
     @Override
+    public String checkUser(User user) {
+        String userId="";
+        try {
+            User u = userDao.checkUser(user);
+            if (u != null) {
+                userId=String.valueOf(u.getUserId());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userId;
+    }
+
+    @Override
+    public User getUserInfo(Integer id) {
+        return userDao.getUserInfo(id);
+    }
+
+
+    @Override
     public List<User> getUser(Map<String, Object> condition) {
         return userDao.getUser(condition);
+    }
+
+    @Override
+    public List<User> getUserList() {
+        return userDao.getUserList();
     }
 }

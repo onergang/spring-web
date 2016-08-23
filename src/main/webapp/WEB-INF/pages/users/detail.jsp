@@ -4,24 +4,30 @@
 
 <html>
 <head>
-    <title>用户登陆页面</title>
+    <title>详情页</title>
     <!--引入静态文件-->
     <link href="<c:url value="/common/css/bootstrap.min.css"/>" rel="stylesheet">
     <script type="text/javascript" src="<c:url value="/common/js/jquery-3.1.0.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/common/js/bootstrap.min.js"/>"></script>
 </head>
 <body>
-<h1 class="page-header">13213123123</h1>
+<h1 class="page-header">个人中心</h1>
 
 <div class="container">
-    <div>11111111</div>
+    <table class="table table-bordered">
+        <tr>
+            <td>姓名：</td>
+            <td>${user.userName}</td>
+        </tr>
+        <tr>
+            <td>性别：</td>
+            <td>${user.sex}</td>
+        </tr>
+        <tr>
+            <td>创建时间：</td>
+            <td>${user.createTime}</td>
+        </tr>
+    </table>
 </div>
-<table class="table table-bordered">
-    <tr>
-        <td>4324</td>
-    </tr>
-</table>
-<img src="<%=request.getContextPath()%>/common/images/logo.png" alt=""><a></a></img>
-<a href="<%=request.getContextPath()%>/users/add"><img src="<%=request.getContextPath()%>/common/images/logo.png" alt=""/></a>
 </body>
 </html>

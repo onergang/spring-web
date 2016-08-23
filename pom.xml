@@ -27,8 +27,9 @@
         <pagehelper.version>4.0.3</pagehelper.version>
         <commons-dbcp.version>1.2</commons-dbcp.version>
         <mysql-connector.version>5.1.37</mysql-connector.version>
+        <joda.version>2.3</joda.version>
     </properties>
-
+    <!--=============依赖============-->
     <dependencies>
         <!-- spring -->
         <dependency>
@@ -42,23 +43,6 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-aop</artifactId>-->
-            <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-        <!-- spring integration -->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.integration</groupId>-->
-            <!--<artifactId>spring-integration-core</artifactId>-->
-            <!--<version>${spring.integration.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.integration</groupId>-->
-            <!--<artifactId>spring-integration-http</artifactId>-->
-            <!--<version>${spring.integration.version}</version>-->
-        <!--</dependency>-->
-        <!-- spring mvc -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
@@ -101,12 +85,6 @@
             <version>${slf4j.version}</version>
             <scope>runtime</scope>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>aopalliance</groupId>-->
-            <!--<artifactId>aopalliance</artifactId>-->
-            <!--<version>1.0</version>-->
-        <!--</dependency>-->
-
         <!-- aspectj -->
         <dependency>
             <groupId>org.aspectj</groupId>
@@ -161,14 +139,19 @@
             <artifactId>commons-dbcp</artifactId>
             <version>${commons-dbcp.version}</version>
         </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector.version}</version>
         </dependency>
+        <!--时间转换 -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda.version}</version>
+        </dependency>
     </dependencies>
-
+    <!--=============编译============-->
     <build>
         <finalName>springweb</finalName>
         <pluginManagement>
@@ -187,9 +170,6 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-war-plugin</artifactId>
-                    <!--configuration>
-                        <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
-                    </configuration-->
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -204,5 +184,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

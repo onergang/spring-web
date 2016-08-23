@@ -1,7 +1,9 @@
 package com.gang.practice.spring.dao;
 
 import com.gang.practice.spring.po.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Map;
@@ -21,5 +23,11 @@ public interface UserDao {
 
     public void deleteUser(String id);
 
+    public User checkUser(User user);
+
+    public User getUserInfo(@Param("userId")Integer id);
+
     public List<User> getUser(Map<String, Object> condition);
+
+    public List<User> getUserList();
 }

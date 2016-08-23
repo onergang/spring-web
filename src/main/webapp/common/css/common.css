@@ -1,0 +1,32 @@
+input {
+    display: inline;
+    height: 20px;
+    padding: 6px 20px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.addButton {
+    position: relative;
+    display: inline-block;
+    background: #D0EEFF;
+    border: 2px solid #99D3F5;
+    border-radius: 6px;
+    padding: 10px 20px 15px 20px;
+    overflow: hidden;
+    color: #1E88C7;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 9px;
+}
+
+.addButton:hover {
+    background: #AADFFD;
+    border-color: #78C3F3;
+    color: #004974;
+    text-decoration: none;
+}
