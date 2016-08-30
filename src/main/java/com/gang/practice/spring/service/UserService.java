@@ -17,7 +17,7 @@ public interface UserService<T> {
 
     public boolean editUser(T entity);
 
-    public boolean deleteUser(String id);
+    public boolean deleteUser(Integer id);
 
     public String checkUser(User user);
 

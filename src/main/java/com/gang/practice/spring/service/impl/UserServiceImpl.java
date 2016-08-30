@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService<User> {
     }
 
     @Override
-    public boolean deleteUser(String id) {
+    public boolean deleteUser(Integer id) {
         boolean flag = false;
         try {
             userDao.deleteUser(id);

@@ -21,7 +21,7 @@ public interface UserDao {
 
     public void editUser(User entity);
 
-    public void deleteUser(String id);
+    public void deleteUser(Integer id);
 
     public User checkUser(User user);
 

@@ -17,7 +17,7 @@
 <body>
 <div class="container">
     <h3 class="page-header">
-        <img src="common/images/logo.png" alt="logo"/>
+        <a href="/"><img src="common/images/logo.png" alt="logo"/></a>
     </h3>
     <a href="users/1">登陆</a>
     <a href="users/2">添加用户</a>

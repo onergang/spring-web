@@ -55,31 +55,39 @@ public class UserController {
     public String userLogin(User user) {
         String userId = userService.checkUser(user);
         String viewName = "users/add";
-        if (userId!=null&&!userId.trim().isEmpty()) {
-            viewName = "redirect:/users/detail/"+userId;
+        if (userId != null && !userId.trim().isEmpty()) {
+            viewName = "redirect:/users/detail/" + userId;
         }
         return viewName;
     }
 
     @RequestMapping("/add")
     public ModelAndView addUser(User user) {
-        ModelAndView mv=new ModelAndView();
-        boolean b=userService.addUser(user);
-        if(b){
+        ModelAndView mv = new ModelAndView();
+        boolean b = userService.addUser(user);
+        if (b) {
             mv.setViewName("users/add");
-            mv.addObject("ok","成功");
+            mv.addObject("ok", "成功");
         }
         return mv;
     }
 
+    @RequestMapping("/edit/{userId}")
+    public String editUserSkip(@PathVariable("userId") Integer userId, Model model) {
+        if (null != userId)
+            model.addAttribute("user", userService.getUserInfo(userId));
+        return "/users/edit";
+    }
+
     @RequestMapping("/edit")
     public String editUser(@ModelAttribute User user) {
-        System.out.println("----------edit----------------" + new Date());
-        System.out.println("------------edit--------------" + user.toString());
-        if (userService.editUser(user)) {
-            System.out.println("-------ok----------------");
+        String viewName = "/users/edit";
+        if (null != user) {
+            boolean flag = userService.editUser(user);
+            if (flag)
+                viewName = "/users/detail";
         }
-        return "/users/edit";
+        return viewName;
     }
 
     @RequestMapping("/list")
@@ -94,5 +102,14 @@ public class UserController {
         User user = userService.getUserInfo(id);
         model.addAttribute("user", user);
         return "users/detail";
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String removeUser(@PathVariable("id") Integer id, Model model) {
+        boolean b = userService.deleteUser(id);
+        if (b) {
+//            model.addAttribute("user", user);
+        }
+        return "redirect:/users/add";
     }
 }

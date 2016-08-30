@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<h2 class="container">页面不知道去哪了.</h2>
+<h2 class="page-header">页面不知道去哪了.</h2>
 <p><a href="<c:url value="/"/>">返回首页</a></p>
 </body>
 </html>
