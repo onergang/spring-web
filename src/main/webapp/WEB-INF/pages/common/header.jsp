@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%String path=request.getContextPath();%>
 <html>
 <head>
     <!--引入静态文件-->
@@ -7,7 +8,6 @@
     <script type="text/javascript" src="<c:url value="/common/js/bootstrap.min.js"/>"></script>
 </head>
 <body>
-<%String path=request.getContextPath();%>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
