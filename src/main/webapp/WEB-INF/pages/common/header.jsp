@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%String path=request.getContextPath();%>
+<%String path = request.getContextPath();%>
 <html>
 <head>
     <!--引入静态文件-->
@@ -20,7 +20,9 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="nav navbar-brand" href="<c:url value="/"/>">
-                <img alt="Brand" src="<%=request.getContextPath()%>/common/images/logo/32.png">
+                <%--导入图片的两种方式--%>
+                <img alt="Brand" src="<c:url value="/common/images/logo/32.png"/>">
+                <%--<img alt="Brand" src="<%=request.getContextPath()%>/common/images/logo/32.png">--%>
             </a>
         </div>
 
@@ -28,40 +30,42 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="<c:url value="/"/>">首页 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
+                <li><a href="#">课堂</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Dropdown <span class="caret"></span></a>
+                       aria-expanded="false">分类 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
+                        <li><a href="#">Java</a></li>
+                        <li><a href="#">SQL</a></li>
+                        <li><a href="#">Redis</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">AngularJS</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li><a href="#">其他</a></li>
                     </ul>
                 </li>
             </ul>
             <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="搜索...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-info" type="button" >Go!</button>
+                     </span>
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="<%=path%>/users/1">登陆</a></li>
                 <li><a href="<%=path%>/users/2">注册</a></li>
                 <%--<li class="dropdown">--%>
-                    <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"--%>
-                       <%--aria-expanded="false">Dropdown <span class="caret"></span></a>--%>
-                    <%--<ul class="dropdown-menu">--%>
-                        <%--<li><a href="#">Action</a></li>--%>
-                        <%--<li><a href="#">Another action</a></li>--%>
-                        <%--<li><a href="#">Something else here</a></li>--%>
-                        <%--<li role="separator" class="divider"></li>--%>
-                        <%--<li><a href="#">Separated link</a></li>--%>
-                    <%--</ul>--%>
+                <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"--%>
+                <%--aria-expanded="false">Dropdown <span class="caret"></span></a>--%>
+                <%--<ul class="dropdown-menu">--%>
+                <%--<li><a href="#">Action</a></li>--%>
+                <%--<li><a href="#">Another action</a></li>--%>
+                <%--<li><a href="#">Something else here</a></li>--%>
+                <%--<li role="separator" class="divider"></li>--%>
+                <%--<li><a href="#">Separated link</a></li>--%>
+                <%--</ul>--%>
                 <%--</li>--%>
             </ul>
         </div>

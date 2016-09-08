@@ -12,9 +12,16 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
     </context:component-scan>
 
-    <!--   对静态资源的处理-->
-    <mvc:default-servlet-handler/>
-    <mvc:annotation-driven/>
+    <!--默认注解映射支持-->
+    <!--<mvc:annotation-driven/>-->
+    <!--对静态资源的处理 方案一 （二选一）-->
+    <!--<mvc:default-servlet-handler/>-->
+    <!-- 对静态资源文件的访问  方案二 （二选一） cache-period 可以使得静态资源进行web cache-->
+    <!--<mvc:resources/ >自动注册的 SimpleUrlHandlerMapping的order属性值是： 2147483646-->
+    <!--<mvc:default-servlet-handler/>自动注册 的SimpleUrlHandlerMapping 的order属性值是： 2147483647-->
+    <!--spring会先执行order值比较小的。当访问一个图片文件时，
+      先通过 DefaultAnnotationHandlerMapping 来找处理器图片名称action。找不到的话按order值升序找，由于最后一个 SimpleUrlHandlerMapping 是匹配 "/**"的，所以一定会匹配上，就可以响应图片。-->
+    <mvc:resources mapping="common/**" location="common/" cache-period="31556926"/>
 
     <!--视图解析-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
