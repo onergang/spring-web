@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -110,6 +111,6 @@ public class UserController {
         if (b) {
 //            model.addAttribute("user", user);
         }
-        return "redirect:/users/add";
+        return "redirect:/users/list";
     }
 }

@@ -60,4 +60,7 @@
             </if>
         </where>
     </select>
+    <delete id="deleteUser" >
+        delete from users where userId=#{0}
+    </delete>
 </mapper>

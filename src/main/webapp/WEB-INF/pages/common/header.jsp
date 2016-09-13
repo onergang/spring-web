@@ -4,6 +4,7 @@
 <head>
     <!--引入静态文件-->
     <link href="<c:url value="/common/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/common/css/common.css"/>" rel="stylesheet">
     <script type="text/javascript" src="<c:url value="/common/js/jquery-3.1.0.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/common/js/bootstrap.min.js"/>"></script>
 </head>
