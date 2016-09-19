@@ -87,7 +87,7 @@ public class IdentityCardUtil {
      * @return
      */
     public Set<String> getBirthday(String encryptIdCard) {
-        Set<String> birthday = new HashSet<>();
+        Set<String> birthday = new LinkedHashSet<>();
 
         char validateChar = encryptIdCard.charAt(encryptIdCard.length() - 1);
         int mod = CollectionUtil.getLocation(validate, validateChar);
