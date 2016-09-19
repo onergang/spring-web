@@ -10,6 +10,14 @@ import java.util.*;
  * @Version V1.0
  */
 public class IdentityCardUtil {
+    private static IdentityCardUtil instance;
+
+    public static IdentityCardUtil getInstance() {
+        if (instance == null)
+            instance = new IdentityCardUtil();
+        return instance;
+    }
+
     int[] weight = {7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2}; // 十七位数字本体码权重
     char[] validate = {'1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2'};   // 返回值
 
@@ -18,9 +26,9 @@ public class IdentityCardUtil {
             throw new IllegalArgumentException("identityCard length too long");
         boolean validFlag = false;
         // 获取前17位字符串
-        String identityCardString = identityCard.substring(0, identityCard.length() - 1);
-        char validateNumber = getValidateChar(identityCardString);
-        char lastNumber = identityCard.charAt(identityCard.length() - 1);
+        String identityCardSubString = getSubString(identityCard);
+        char validateNumber = calculateValidateChar(identityCardSubString);
+        char lastNumber = getLastChar(identityCard);
         if (lastNumber == validateNumber) {
             validFlag = true;
         }
@@ -30,24 +38,44 @@ public class IdentityCardUtil {
     /**
      * 计算最后一位
      *
-     * @param identityCardString
+     * @param identityCardSubString
      * @return
      */
-    public char getValidateChar(String identityCardString) {
-        int mod = getSum(identityCardString) % 11;
+    public char calculateValidateChar(String identityCardSubString) {
+        int mod = getSum(identityCardSubString) % 11;
         return validate[mod];
+    }
+
+    /**
+     * 获取前17位
+     *
+     * @param identityCard
+     * @return
+     */
+    public String getSubString(String identityCard) {
+        return identityCard.substring(0, identityCard.length() - 1);
+    }
+
+    /**
+     * 获取最后1位
+     *
+     * @param identityCard
+     * @return
+     */
+    public char getLastChar(String identityCard) {
+        return identityCard.charAt(identityCard.length() - 1);
     }
 
     /**
      * 计算前17位的和
      *
-     * @param identityCardString
+     * @param identityCardSubString
      * @return
      */
-    public int getSum(String identityCardString) {
+    public int getSum(String identityCardSubString) {
         int sum = 0;
-        for (int i = 0; i < identityCardString.length(); i++) {
-            sum += Integer.parseInt(String.valueOf(identityCardString.charAt(i))) * weight[i];
+        for (int i = 0; i < identityCardSubString.length(); i++) {
+            sum += Integer.parseInt(String.valueOf(identityCardSubString.charAt(i))) * weight[i];
         }
         return sum;
     }
@@ -60,27 +88,14 @@ public class IdentityCardUtil {
      */
     public Set<String> getBirthday(String encryptIdCard) {
         Set<String> birthday = new HashSet<>();
-        int mod = 0;
+
         char validateChar = encryptIdCard.charAt(encryptIdCard.length() - 1);
-        System.out.println(validateChar);
-        for (int i = 0; i < validate.length; i++) {
-            if (validateChar == validate[i])
-                mod = i;
-        }
+        int mod = CollectionUtil.getLocation(validate, validateChar);
+
         Integer bornYear = Integer.parseInt(encryptIdCard.substring(6, 10));
-        Map<Integer, Integer> datas = new HashMap<>();
-        if (DateUtil.isLeapYear(bornYear))
-            datas.put(2, 29);
-        else
-            datas.put(2, 28);
-        int[] bigMonth = new int[]{1, 3, 5, 7, 8, 10, 12};
-        for (int big : bigMonth) {
-            datas.put(big, 31);
-        }
-        int[] smallMonth = new int[]{4, 6, 9, 11};
-        for (int small : smallMonth) {
-            datas.put(small, 30);
-        }
+
+        Map<Integer, Integer> datas = DateUtil.getTotalDays(bornYear);
+
         for (int i = 1; i <= 12; i++) {
             String month = String.valueOf(i);
             if (month.length() == 1)
@@ -101,5 +116,4 @@ public class IdentityCardUtil {
         }
         return birthday;
     }
-
 }
