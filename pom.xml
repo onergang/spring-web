@@ -150,17 +150,17 @@
             <version>${mybatis-spring.version}</version>
         </dependency>
         <!--数据源 dbcp-->
-        <dependency>
-            <groupId>commons-dbcp</groupId>
-            <artifactId>commons-dbcp</artifactId>
-            <version>${commons-dbcp.version}</version>
-        </dependency>
-        <!--数据源 druid-->
         <!--<dependency>-->
-            <!--<groupId>com.alibaba</groupId>-->
-            <!--<artifactId>druid</artifactId>-->
-            <!--<version>${druid.version}</version>-->
+            <!--<groupId>commons-dbcp</groupId>-->
+            <!--<artifactId>commons-dbcp</artifactId>-->
+            <!--<version>${commons-dbcp.version}</version>-->
         <!--</dependency>-->
+        <!--数据源 druid-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
