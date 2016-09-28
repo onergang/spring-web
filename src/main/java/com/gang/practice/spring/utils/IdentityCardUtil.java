@@ -67,7 +67,7 @@ public class IdentityCardUtil {
     }
 
     /**
-     * 计算前17位的和
+     * 计算前17位的和,0的话不计算
      *
      * @param identityCardSubString
      * @return
@@ -75,6 +75,8 @@ public class IdentityCardUtil {
     public int getSum(String identityCardSubString) {
         int sum = 0;
         for (int i = 0; i < identityCardSubString.length(); i++) {
+            if(identityCardSubString.charAt(i)=='0')
+                continue;
             sum += Integer.parseInt(String.valueOf(identityCardSubString.charAt(i))) * weight[i];
         }
         return sum;
@@ -115,5 +117,17 @@ public class IdentityCardUtil {
             }
         }
         return birthday;
+    }
+    public static  void main(String []args){
+        System.out.println("fdsfdfsd");
+        Date start=new Date();
+        IdentityCardUtil id=IdentityCardUtil.getInstance();
+        Set<String> IdList=id.getBirthday("1427251992****6833");
+        Date end=new Date();
+        for (String ids:IdList){
+            System.out.println(ids);
+        }
+        Long  aa=end.getTime()-start.getTime();
+        System.out.println(aa);
     }
 }
