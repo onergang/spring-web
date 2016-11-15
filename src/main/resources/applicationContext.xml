@@ -74,12 +74,9 @@
         <!--Extra Setting -->
         <!--initialSize: 初始化连接 -->
         <property name="initialSize" value="30"/>
-        <!--maxActive: 最大连接数量 -->
         <property name="maxActive" value="100"/>
-        <!--minIdle: 最小空闲连接 -->
-        <property name="minIdle" value="30"/>
-        <!--maxIdle: 最大空闲连接 -->
         <property name="maxIdle" value="100"/>
+        <property name="minIdle" value="30"/>
         <!--maxWait: 最大等待时间 -->
         <property name="maxWait" value="10000"/>
         <property name="testWhileIdle" value="true"/>

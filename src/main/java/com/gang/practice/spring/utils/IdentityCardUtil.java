@@ -10,11 +10,15 @@ import java.util.*;
  * @Version V1.0
  */
 public class IdentityCardUtil {
-    private static IdentityCardUtil instance;
+    private static volatile IdentityCardUtil instance;
 
     public static IdentityCardUtil getInstance() {
-        if (instance == null)
-            instance = new IdentityCardUtil();
+        if (instance == null) {
+            synchronized (IdentityCardUtil.class) {
+                if (instance == null)
+                    instance = new IdentityCardUtil();
+            }
+        }
         return instance;
     }
 
@@ -75,21 +79,26 @@ public class IdentityCardUtil {
     public int getSum(String identityCardSubString) {
         int sum = 0;
         for (int i = 0; i < identityCardSubString.length(); i++) {
-            if(identityCardSubString.charAt(i)=='0')
+            if (identityCardSubString.charAt(i) == '0')
                 continue;
             sum += Integer.parseInt(String.valueOf(identityCardSubString.charAt(i))) * weight[i];
         }
         return sum;
     }
 
+    public String formatToTwo(String number) {
+        return number.length() > 1 ? number : "0" + number;
+    }
+
     /**
-     * 获取列表
+     * 获取birthday列表
      *
      * @param encryptIdCard
      * @return
      */
     public Set<String> getBirthday(String encryptIdCard) {
-        Set<String> birthday = new LinkedHashSet<>();
+        Set<String> birthdayList = new LinkedHashSet<>();
+        String birthday = null;
 
         char validateChar = encryptIdCard.charAt(encryptIdCard.length() - 1);
         int mod = CollectionUtil.getLocation(validate, validateChar);
@@ -99,23 +108,19 @@ public class IdentityCardUtil {
         Map<Integer, Integer> datas = DateUtil.getTotalDays(bornYear);
 
         for (int i = 1; i <= 12; i++) {
-            String month = String.valueOf(i);
-            if (month.length() == 1)
-                month = "0" + month;
+            String month = formatToTwo(String.valueOf(i));
 
             for (int j = 1; j <= datas.get(i); j++) {
-                String day = String.valueOf(j);
-                if (day.length() == 1)
-                    day = "0" + day;
-
-                String birthString = month + day;
-                String dealString = encryptIdCard.substring(0, 10) + birthString
+                String day = formatToTwo(String.valueOf(j));
+                birthday = month + day;
+                String dealString = encryptIdCard.substring(0, 10) + birthday
                         + encryptIdCard.substring(encryptIdCard.length() - 4, encryptIdCard.length() - 1);
                 int sum = getSum(dealString);
                 if ((sum - mod) % 11 == 0)
-                    birthday.add(birthString);
+                    birthdayList.add(birthday);
             }
         }
-        return birthday;
+        return birthdayList;
     }
+
 }
