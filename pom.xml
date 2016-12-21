@@ -27,6 +27,7 @@
         <commons-dbcp.version>1.2</commons-dbcp.version>
         <druid.version>1.0.18</druid.version>
         <mysql-connector.version>5.1.37</mysql-connector.version>
+        <oracle.version>10.2.0.4.0</oracle.version>
         <shiro.version>1.2.3</shiro.version>
     </properties>
     <!--=============依赖============-->
@@ -165,6 +166,11 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <version>${oracle.version}</version>
         </dependency>
     </dependencies>
     <!--=============编译============-->

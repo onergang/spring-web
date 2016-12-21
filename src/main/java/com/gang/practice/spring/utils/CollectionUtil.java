@@ -10,19 +10,12 @@ package com.gang.practice.spring.utils;
 public class CollectionUtil {
     /**
      * 根据值判断在数组中的位置
+     * 方法中使用泛型， 自动拆箱操作 jdk 处理
      * @param array 数组
      * @param value 数组中的值
      * @return
      */
-    public static int getLocation(Object[] array, Object value) {
-        int location = 0;
-        for (int i = 0; i < array.length; i++) {
-            if (value == array[i])
-                location = i;
-        }
-        return location;
-    }
-    public static int getLocation(char[] array, char value) {
+    public static <T>int getLocation(T[] array, T value) {
         int location = 0;
         for (int i = 0; i < array.length; i++) {
             if (value == array[i])

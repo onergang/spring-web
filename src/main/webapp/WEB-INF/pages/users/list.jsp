@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@include file="../common/tag.jsp"%>
 <%@ include file="../common/header.jsp" %>
 <%@ include file="../common/footer.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -33,9 +32,9 @@
                 <td>${user.mobile}</td>
                 <td>${user.address}</td>
                 <td>
-                    <a href="<%=request.getContextPath()%>/users/edit/${user.userId}"><span
+                    <a href="<%=request.getContextPath()%>/users/${user.userId}/edit"><span
                             class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
-                    <a href="<%=request.getContextPath()%>/users/delete/${user.userId}"><span
+                    <a href="<%=request.getContextPath()%>/users/${user.userId}/delete"><span
                             class="glyphicon glyphicon-remove-circle text-red"></span></a>
                 </td>
             </tr>

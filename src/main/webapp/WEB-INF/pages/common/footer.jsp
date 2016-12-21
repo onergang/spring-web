@@ -1,18 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%String bath = request.getContextPath();%>
-<html>
-<head>
-    <title></title>
-    <style type="text/css">
-        #links {
-            filter: gray
-        }
 
-        #links:hover {
-            filter:;
-        }
-    </style>
-</head>
+
 <body>
 <nav class="navbar navbar-fixed-bottom">
     <div class="center">
@@ -25,4 +14,4 @@
     </div>
 </nav>
 </body>
-</html>
+

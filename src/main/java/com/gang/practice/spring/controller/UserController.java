@@ -1,5 +1,6 @@
 package com.gang.practice.spring.controller;
 
+
 import com.gang.practice.spring.po.User;
 import com.gang.practice.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Date;
-import java.util.HashMap;
+
 import java.util.List;
 
 /**
@@ -57,7 +54,7 @@ public class UserController {
         String userId = userService.checkUser(user);
         String viewName = "users/add";
         if (userId != null && !userId.trim().isEmpty()) {
-            viewName = "redirect:/users/detail/" + userId;
+            viewName = "redirect:/users/" + userId + "/detail";
         }
         return viewName;
     }
@@ -73,7 +70,7 @@ public class UserController {
         return mv;
     }
 
-    @RequestMapping("/edit/{userId}")
+    @RequestMapping("/{userId}/edit")
     public String editUserSkip(@PathVariable("userId") Integer userId, Model model) {
         if (null != userId)
             model.addAttribute("user", userService.getUserInfo(userId));
@@ -93,21 +90,23 @@ public class UserController {
 
     @RequestMapping("/list")
     public Model getUserList(Model model) {
+        // 在需要使用指定数据库的地方加上这个
+//        DataSourceContextHolder.setDataSourceType(DataSourceType.SLAVE.getName());
         List<User> users = userService.getUserList();
         model.addAttribute("users", users);
         return model;
     }
 
-    @RequestMapping("/detail/{id}")
-    public String getUserInfo(@PathVariable("id") Integer id, Model model) {
-        User user = userService.getUserInfo(id);
+    @RequestMapping("/{userId}/detail")
+    public String getUserInfo(@PathVariable("userId") Integer userId, Model model) {
+        User user = userService.getUserInfo(userId);
         model.addAttribute("user", user);
         return "users/detail";
     }
 
-    @RequestMapping("/delete/{id}")
-    public String removeUser(@PathVariable("id") Integer id, Model model) {
-        boolean b = userService.deleteUser(id);
+    @RequestMapping("/{userId}/delete")
+    public String removeUser(@PathVariable("userId") Integer userId, Model model) {
+        boolean b = userService.deleteUser(userId);
         if (b) {
 //            model.addAttribute("user", user);
         }

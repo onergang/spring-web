@@ -1,76 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:task="http://www.springframework.org/schema/task"
-       xsi:schemaLocation="
-    http://www.springframework.org/schema/beans
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:task="http://www.springframework.org/schema/task" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-3.0.xsd
-    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
     http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
     http://www.springframework.org/schema/aop
-    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-
-    <!-- 启动对@AspectJ注解的支持 -->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
     <!-- spring扫描注解的配置 -->
     <context:component-scan base-package="com.gang.practice.spring">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-
-    <!-- 开启这个配置，spring才能识别@Scheduled注解 -->
+    <!-- 切面：启动对 @AspectJ 注解的支持 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!-- 定时器：启用对 @Scheduled 注解的支持 -->
     <task:annotation-driven scheduler="qbScheduler" mode="proxy"/>
     <task:scheduler id="qbScheduler" pool-size="12"/>
-    <!--引入配置文件-->
+
+    <!--引入配置文件,读取数据库配置信息-->
     <context:property-placeholder ignore-unresolvable="true" location="classpath:jdbc.properties"/>
 
-    <!-- 数据源dbcp -->
-    <!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
-    <!--<property name="driverClassName" value="${db.driverClass}"/>-->
-    <!--<property name="url" value="${db.url}"/>-->
-    <!--<property name="username" value="${db.username}"/>-->
-    <!--<property name="password" value="${db.password}"/>-->
-    <!--&lt;!&ndash; Setting &ndash;&gt;-->
-    <!--&lt;!&ndash;maxActive: 最大连接数量 &ndash;&gt;-->
-    <!--<property name="maxActive" value="100"/>-->
-    <!--&lt;!&ndash;minIdle: 最小空闲连接 &ndash;&gt;-->
-    <!--<property name="minIdle" value="30"/>-->
-    <!--&lt;!&ndash;maxIdle: 最大空闲连接 &ndash;&gt;-->
-    <!--<property name="maxIdle" value="100"/>-->
-    <!--&lt;!&ndash;initialSize: 初始化连接 &ndash;&gt;-->
-    <!--<property name="initialSize" value="30"/>-->
-    <!--&lt;!&ndash;maxWait: 最大等待时间 &ndash;&gt;-->
-    <!--<property name="maxWait" value="10000"/>-->
-    <!--&lt;!&ndash; 自动重连设置 &ndash;&gt;-->
-    <!--<property name="testWhileIdle">-->
-    <!--<value>true</value>-->
-    <!--</property>-->
-    <!--<property name="testOnBorrow">-->
-    <!--<value>false</value>-->
-    <!--</property>-->
-    <!--<property name="testOnReturn">-->
-    <!--<value>false</value>-->
-    <!--</property>-->
-    <!--<property name="validationQuery">-->
-    <!--<value>select 1 from dual</value>-->
-    <!--</property>-->
-    <!--<property name="timeBetweenEvictionRunsMillis">-->
-    <!--<value>30000</value>-->
-    <!--</property>-->
-    <!--<property name="numTestsPerEvictionRun">-->
-    <!--<value>50</value>-->
-    <!--</property>-->
-    <!--</bean>-->
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+    <bean id="dataSource_master" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+          destroy-method="close">
         <!--Base Setting-->
-        <property name="url" value="${db.url}"/>
-        <property name="username" value="${db.username}"/>
-        <property name="password" value="${db.password}"/>
+        <property name="url" value="${db.master.url}"/>
+        <property name="username" value="${db.master.username}"/>
+        <property name="password" value="${db.master.password}"/>
         <!--Extra Setting -->
         <!--initialSize: 初始化连接 -->
         <property name="initialSize" value="30"/>
@@ -85,21 +48,70 @@
         <property name="validationQuery" value="select 1 from dual"/>
         <property name="timeBetweenEvictionRunsMillis" value="30000"/>
     </bean>
+    <bean id="dataSource_slave" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+          destroy-method="close">
+        <!--Base Setting-->
+        <property name="url" value="${db.slave.url}"/>
+        <property name="username" value="${db.slave.username}"/>
+        <property name="password" value="${db.slave.password}"/>
+        <!--<property name="driverClassName" value="${db.slave.driverClass}"/>-->
+        <!--Extra Setting -->
+        <!--initialSize: 初始化连接 -->
+        <property name="initialSize" value="30"/>
+        <property name="maxActive" value="100"/>
+        <property name="maxIdle" value="100"/>
+        <property name="minIdle" value="30"/>
+        <!--maxWait: 最大等待时间 -->
+        <property name="maxWait" value="10000"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="validationQuery" value="select 1 from dual"/>
+        <property name="timeBetweenEvictionRunsMillis" value="30000"/>
+    </bean>
+
+    <bean id="dataSource" class="com.gang.practice.spring.db.DynamicDataSource">
+        <property name="defaultTargetDataSource" ref="dataSource_master"/>
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+                <entry key="master" value-ref="dataSource_master"/>
+                <entry key="slave" value-ref="dataSource_slave"/>
+            </map>
+        </property>
+    </bean>
+
     <!-- 配置SqlSessionFactoryBean -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" value="classpath:mybatis.xml"/>
     </bean>
-    <!-- 定义式事务Transction -->
-    <bean id="transactionManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+
     <!--MapperScannerConigurer实际是在解析加载bean定义阶段的，此时设置sqlSessionFactory会导致提前初始化一些类-->
     <!--PropertyPlaceholderConfigurer还没来得及替换定义中的变量，导致把表达式当作字符串复制了-->
     <!--解决办法：使用sqlSessionFactoryBeanName注入，不会立即初始化sqlSessionFactory-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.gang.practice.spring.dao"/>
-        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
+
+    <!-- 定义式事务Transction -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name ="find*" read-only="true" />
+            <tx:method name ="get*" read-only="true" />
+            <tx:method name ="query*" read-only="true" />
+            <tx:method name ="add*" propagation="REQUIRED" />
+            <tx:method name ="update*" propagation="REQUIRED" />
+            <tx:method name ="del*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+    <aop:config >
+        <aop:pointcut id="pointcut" expression="execution(* com.gang.practice.spring.service..*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
+    </aop:config>
+
 </beans>
