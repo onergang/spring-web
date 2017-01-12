@@ -12,8 +12,8 @@
     <script type="text/javascript" src="<c:url value="/common/js/bootstrap.min.js"/>"></script>
 </head>
 <body>
-<h1 class="page-header">个人中心</h1>
 <div class="container">
+    <h1 class="page-header">个人中心</h1>
     <table class="table table-bordered">
         <tr>
             <td>姓名：</td>
@@ -22,6 +22,10 @@
         <tr>
             <td>性别：</td>
             <td>${user.sex}</td>
+        </tr>
+        <tr>
+            <td>住址：</td>
+            <td>${user.address}</td>
         </tr>
         <tr>
             <td>创建时间：</td>

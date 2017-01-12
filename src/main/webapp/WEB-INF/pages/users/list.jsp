@@ -32,7 +32,7 @@
                 <td>${user.mobile}</td>
                 <td>${user.address}</td>
                 <td>
-                    <a href="<%=request.getContextPath()%>/users/${user.userId}/edit"><span
+                    <a href="<%=request.getContextPath()%>/users/${user.userId}/detail"><span
                             class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
                     <a href="<%=request.getContextPath()%>/users/${user.userId}/delete"><span
                             class="glyphicon glyphicon-remove-circle text-red"></span></a>

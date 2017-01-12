@@ -1,8 +1,6 @@
 package com.gang.practice.spring.utils;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @ClassName: DateUtil
@@ -65,4 +63,56 @@ public class DateUtil {
         return leapFlag;
     }
 
+    /**
+     * 自定义一个时间(仅 年 月 日 中某一属性修改)
+     * @param type 要改变的属性 eg:Calendar.MONTH
+     * @param offset 偏移量 eg：-1 与当前时间的差值
+     * @return
+     */
+    public static Date
+    getCustomDate(int type, int offset) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(type, calendar.get(type) + offset);
+        return calendar.getTime();
+    }
+    /**
+     * 将秒转换为 时分秒
+     * @param second
+     * @return
+     */
+    public static String dateParse(int second) {
+        int h = 0;
+        int m = 0;
+        int s = 0;
+        String str = "";
+        int temp = second % 3600;
+        if (second > 3600) {
+            h = second / 3600;
+            if (temp != 0) {
+                if (temp > 60) {
+                    m = temp / 60;
+                    if (temp % 60 != 0) {
+                        s = temp % 60;
+                    }
+                } else {
+                    s = temp;
+                }
+            }
+        } else {
+            m = second / 60;
+            if (second % 60 != 0) {
+                s = second % 60;
+            }
+        }
+        if (h > 0) {
+            str += h + "时";
+        }
+        if (m > 0) {
+            str += m + "分";
+        }
+        if (s > 0) {
+            str += s + "秒";
+        }
+        return str;
+    }
 }

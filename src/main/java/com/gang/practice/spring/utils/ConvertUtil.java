@@ -59,9 +59,4 @@ public class ConvertUtil {
         }
         return toChinese.toString();
     }
-
-    public static void main(String[] args) {
-        String aa = numberToChinese(233233);
-        System.out.print(aa);
-    }
 }
