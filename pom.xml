@@ -26,7 +26,7 @@
         <pagehelper.version>4.0.3</pagehelper.version>
         <commons-dbcp.version>1.2</commons-dbcp.version>
         <druid.version>1.0.18</druid.version>
-        <mysql-connector.version>8.0.16</mysql-connector.version>
+        <mysql-connector.version>8.0.28</mysql-connector.version>
         <oracle.version>10.2.0.4.0</oracle.version>
         <shiro.version>[1.4.2,)</shiro.version>
     </properties>
