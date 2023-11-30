@@ -23,7 +23,7 @@
         <servlet.version>3.1.0</servlet.version>
         <mybatis.version>3.5.6</mybatis.version>
         <mybatis-spring.version>1.2.3</mybatis-spring.version>
-        <pagehelper.version>4.0.3</pagehelper.version>
+        <pagehelper.version>5.3.1</pagehelper.version>
         <commons-dbcp.version>1.2</commons-dbcp.version>
         <druid.version>1.0.18</druid.version>
         <mysql-connector.version>8.0.28</mysql-connector.version>
